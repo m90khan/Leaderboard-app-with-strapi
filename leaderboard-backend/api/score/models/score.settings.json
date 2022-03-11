@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "scores",
+  "info": {
+    "name": "Score"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "player": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "games": {
+      "collection": "game",
+      "via": "scores",
+      "dominant": true
+    }
+  }
+}

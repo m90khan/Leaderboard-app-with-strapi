@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scorecard</title>
+    <style>
+      * {
+        font-family: Helvetica, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 42px 24px;
+      }
+      .scoreCard {
+        border: 1px solid #eee;
+        border-radous: 3px;
+        padding: 25px;
+        margin: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>ScoreBoard for Game</h1>
+      <!-- <div class="scoreCard">
+      <p>Player: Alex</p>
+      <p>Score: 300</p>
+    </div> -->
+    </div>
+    <script>
+      window.onload = async () => {
+        try {
+          const res = await fetch('http://localhost:1337/games?name=Cricket');
+          const data = await res.json();
+          console.log(data);
+          if (data) {
+            data[0].scores.map((entry, i) => {
+              const { player, score } = entry;
+
+              const scoreCard = `
+             <div class="scoreCard">
+               <p>Player: ${player} </p>
+               <p>Score: ${score}</p>
+               </div>
+               `;
+
+              document
+                .querySelector('.container')
+                .insertAdjacentHTML('beforeend', scoreCard);
+            });
+          }
+        } catch (e) {}
+      };
+    </script>
+  </body>
+</html>
